@@ -1,0 +1,903 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.boardsOutside {
+  min-height: 100vh;
+  padding: 0 !important;
+  .boardsNav{
+    height: 45px;
+    background-color: #026AA7;
+    .boardsLinkTitle{
+      margin-bottom: 2px !important;
+      margin-left: 7px;
+    }
+    .boardsLink{
+      width: 90px;
+      background-color: #5094BA;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      padding: 3px 7px;
+      cursor: pointer;
+      transition: box-shadow .3s ease;
+      &:hover{
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+    }
+    .boardsAvatar{
+      width: 35px;
+      height: 35px;
+      background-color: #D4D9DF;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      animation-duration: .3s;
+      animation-name: bRotation;
+      &:hover {
+        background-color: #AFB4BA;
+        animation-duration: .3s;
+        animation-name: xRotation;
+      }
+    }
+  }
+}
+
+.personalBoardHeader{
+  margin: 20px 0;
+  .personalBoardBlock{
+    margin-bottom: 2px !important;
+    margin-left: 10px;
+  }
+}
+
+.boardElementBlock{
+  width: 250px;
+  height: 100px;
+  background-color: #0067A2;
+  border: none;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  padding: 5px 0 0 10px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: box-shadow .3s ease;
+  &:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.boardForm{
+  background-color: #D6DADD;
+  color: #696D70;
+  padding: 0;
+  text-align: center;
+  line-height: 100px;
+}
+
+.boardAuthBorder{
+  outline: 3px solid #FFFF00;
+}
+
+.Modal{
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1002;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all .3s ease;
+  &__content{
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #fff;
+    transform: scale(0.5);
+    transition: all .3s ease;
+    width: 50vw;
+    &.active {
+      transform: scale(1);
+    }
+  }
+  &.active{
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.notesPageContainer{
+  min-height: 100vh;
+  background-color: #0079BE;
+  .notesPageHeader {
+    padding: 20px 0 30px;
+    font-weight: bold;
+    color: #fff;
+    .notesPageBlock {
+      margin-bottom: 2px !important;
+      margin-left: 10px;
+    }
+    .notesPageBlockButton{
+      color: #fff;
+      font-weight: bold;
+      background-color: #0079BE;
+      padding: 3px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 150px;
+      outline: none;
+      border: none;
+      border-radius: 5px;
+      transition: all .3s ease;
+      &:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+}
+
+.Menu {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: all .3s ease;
+  &__content {
+    position: absolute;
+    top: 50px;
+    right: -300px;
+    width: 300px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 2px;
+    background-color: #EEEFF1;
+    transform: scale(0.5);
+    transition: all .3s ease;
+    &.active {
+      transform: scale(1);
+      right: 20px;
+    }
+  }
+  &.active {
+    opacity: 1;
+    right: 100px;
+    pointer-events: all;
+  }
+}
+
+.notesPageMenuHeader{
+  position: relative;
+  text-align: center;
+  margin-bottom: 10px;
+  >h4{
+    text-align: center;
+    color: #000;
+  }
+  >button{
+    position: absolute;
+    top: 2px;
+    right: -100px;
+    border: none;
+    border-radius: 3px;
+    background-color: transparent;
+    color: #676767;
+    animation-duration: .3s;
+    animation-name: bRotation;
+    &:hover{
+      animation-name: xRotation;
+    }
+  }
+}
+
+.notesPageMenuBoardActions{
+  width: 100%;
+  >button{
+    color: #676767;
+    width: 100%;
+    height: 50px;
+    margin: 5px 0;
+    background-color: #EEEFF1;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+    transition: all .3s ease;
+    &:hover {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+  }
+}
+
+@keyframes xRotation {
+  0% {
+    transform: rotate(0deg)
+  }
+
+  25% {
+    transform: rotate(90deg)
+  }
+
+  50%{
+    transform: rotate(180deg)
+  }
+
+  75%{
+    transform: rotate(270deg)
+  }
+
+  100%{
+    transform: rotate(360deg)
+  }
+}
+
+@keyframes bRotation {
+  0% {
+    transform: rotate(0deg)
+  }
+
+  25% {
+    transform: rotate(-90deg)
+  }
+
+  50% {
+    transform: rotate(-180deg)
+  }
+
+  75% {
+    transform: rotate(-270deg)
+  }
+
+  100% {
+    transform: rotate(-360deg)
+  }
+}
+
+.notesPageMenuActivity{
+  margin-top: 15px;
+  width: 100%;
+  .notesPageMenuActivityHeader{
+    width: 100%;
+    margin: 10px 0 0;
+    color: #000;
+    >svg{
+      margin-left: 10px;
+    }
+    >p{
+      margin-left: 10px;
+    }
+  }
+}
+
+.notesPageMenuActivityBody{
+  margin-bottom: 20px;
+  color: #676767;
+}
+
+.notesPageMenuBlock{
+  position: relative;
+  &::before{
+    content: "";
+    position: absolute;
+    z-index: 1001;
+    display: block;
+    height: 1px;
+    background-color: #676767;
+    width: 100%;
+    top: 45px;
+    left: 0;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: 1001;
+    display: block;
+    height: 1px;
+    background-color: #676767;
+    width: 100%;
+    top: 173px;
+    left: 0;
+  }
+}
+
+.Profile {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  opacity: 0;
+  pointer-events: none;
+  transition: all .3s ease;
+  &__content {
+    position: absolute;
+    top: 50px;
+    right: -300px;
+    width: 300px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 2px;
+    background-color: #EEEFF1;
+    transform: scale(0.5);
+    transition: all .3s ease;
+    &.active {
+      transform: scale(1);
+      right: 20px;
+    }
+  }
+  &.active {
+    opacity: 1;
+    right: 100px;
+    pointer-events: all;
+  }
+}
+
+
+.profileInnerButton{
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: 1001;
+    display: block;
+    height: 1px;
+    background-color: #676767;
+    width: 300%;
+    top: -30px;
+    left: -80px;
+  }
+}
+
+.profileInnerHeader{
+  >p{
+    font-weight: bold;
+  }
+}
+
+.authPageContainer{
+  min-height: 100vh;
+  background-color: #0079BE;
+  position: relative;
+}
+
+.authFormWrapper{
+  width: 350px;
+  background-color: #fff;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  .authFormInnerLock{
+    border: none;
+    width: 50px;
+    height: 50px;
+    background-color: #f00;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    margin: 10px 0;
+  }
+}
+
+.bottomSignUpLink{
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  width: 100%;
+}
+
+.userNameAvatarFirstLetter{
+  width: 100px;
+  height: 100px;
+  background-color: #BA55D3;
+  text-align: center;
+  line-height: 100px;
+  font-weight: bold;
+  font-size: 30px;
+  color: #fff;
+}
+
+.listFormWrapper {
+  margin: 0;
+  padding: 0;
+  width: 350px;
+  margin-top: 5px;
+}
+
+.addListTitleForm{
+  background-color: rgba(0, 0, 0, .4);
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  color: #fff;
+  width: 350px;
+  padding: 5px 0 5px 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  animation-duration: .5s;
+  &:focus{
+    &::-moz-placeholder {
+      color: #E3E4E6;
+    }
+    &::-webkit-placeholder {
+      color: #E3E4E6;
+    }
+    &::-ms-placeholder {
+      color: #E3E4E6;
+    }
+    &::placeholder {
+      color: #E3E4E6;
+    }
+  }
+  &Wrong{
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.9);
+  }
+  &Success {
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.9);
+  }
+}
+
+@keyframes inputShake {
+  0% {
+    transform: rotate(0deg)
+  }
+
+  25% {
+    transform: rotate(5deg)
+  }
+
+  50% {
+    transform: rotate(-5deg)
+  }
+
+  75% {
+    transform: rotate(5deg)
+  }
+
+  100% {
+    transform: rotate(0deg)
+  }
+}
+
+.listBlock{
+  padding: 7px 15px;
+  width: 350px;
+  background-color: #E2E3E5;
+  // height: 300px;
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  .listBlockHeaderTitle{
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .listBlockHeaderIcon{
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 15px;
+    color: #A3A4A6;
+    border: none;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: all .3s ease;
+    &:hover{
+      color: #f00;
+    }
+  }
+}
+
+.addTitleListForm{
+  outline: none;
+  border: none;
+  border-radius: 2px;
+  background-color: transparent;
+}
+
+.cardInnerBlock{
+  padding: 5px 10px;
+  background-color: #fff;
+  border-radius: 3px;
+  margin: 0 0 5px;
+  transition: all .3s ease;
+  .cardInnerBlockIcon{
+    color: #A3A4A6;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    transition: all .3s ease;
+    &:hover {
+      color: #0f0;
+    }
+  }
+  &.dragging{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.listBlockFooter{
+  font-size: 14px;
+  color: #A3A4A6;
+  width: 100px;
+  cursor: pointer;
+  font-weight: bold;;
+  transition: all .3s ease;
+  &:hover{
+    color: #8A8B8D;
+  }
+}
+
+.listBlockFooterForm{
+  width: 100%;
+  cursor: default;
+  .listBlockFooterInput{
+    outline: none;
+    border: none;
+    width: 100%;
+    border-radius: 3px;
+    padding: 5px 8px;
+  }
+  .listBlockFooterCross{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 30px;
+    height: 30px;
+    color: #A3A4A6;
+    transition: all .3s ease;
+    cursor: pointer;
+    &:hover {
+      color: #8A8B8D;
+    }
+  }
+}
+
+.CardModal {
+  height: 100vh;
+  width: 100vw;
+  overflow-y: scroll;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1002;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all .3s ease;
+  &__content {
+    padding: 20px;
+    border-radius: 2px;
+    background-color: #EDEEF0;
+    transform: scale(0.5);
+    transition: all .3s ease;
+    width: 50vw;
+    &.active {
+      transform: scale(1);
+    }
+  }
+
+  &.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.CardModal__contentHeaderLeft{
+  color: #97989A;
+  .CardModal__contentHeaderLeftTitle{
+    color: #000;
+    width: 200px;
+    height: 30px;
+    overflow: hidden;
+  }
+}
+
+.CardModal__contentHeaderRightDeleteButton{
+  border: none;
+  border-radius: 3px;
+  background-color: #D6DADD;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all .3s ease;
+  >p{
+    margin-bottom: 0 !important;
+  }
+  &:hover{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    background-color: #B7BBBE;
+  }
+}
+
+.CardModal__contentHeaderRightCloseButton{
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: #A3A4A6;
+  transition: all .3s ease;
+  cursor: pointer;
+  animation-duration: .3s;
+  animation-name: bRotation;
+  &:hover {
+    color: #8A8B8D;
+    animation-name: xRotation;
+  }
+}
+
+.CardModal__contentFooterHideDetails{
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 14px;
+  color: #98999B;
+  height: 20px;
+  cursor: pointer;
+  transition: all .3s ease;
+  &:hover {
+    color: #6A6B6D;
+  }
+}
+
+.CardModal__contentFooterActivity{
+  color: #98999B;
+  .CardModal__contentFooterActivityTitle{
+    font-weight: bold;
+    color: #000;
+  }
+}
+
+.inListSubTitle{
+  font-size: 14px;
+  color: #98999B;
+  margin-top: -8px;
+  margin-left: 42px;
+}
+
+.CardModal__contentBodyDescriptionHead{
+  color: #98999B;
+  >p{
+    margin-bottom: 0 !important;
+  }
+  .CardModal__contentBodyDescriptionText{
+    font-weight: bold;
+    color: #000;
+  }
+}
+
+.CardModal__contentBodyDescription{
+  width: 100%;
+  .CardModal__contentBodyDescriptionTextArea{
+    width: 100%;
+    border: 1px solid #98999B;
+    border-radius: 2px;
+    background-color: transparent;
+    outline: none;
+    min-height: 40px;
+    max-height: 100px;
+    padding: 5px 10px;
+    overflow-y: scroll;
+  }
+}
+
+.listBlockHeaderTitleForm{
+  margin-bottom: 10px;
+}
+
+.CardModal__contentBodyDescriptionPadding{
+  width: 100%;
+  padding: 5px 10px;
+}
+
+.cardInnerBlockTitleLength{
+  word-wrap: break-word;
+  overflow-x: hidden;
+  padding-right: 5px;
+}
+
+.listBlockHeaderTitle{
+  word-wrap: break-word;
+  overflow-x: hidden;
+}
+
+.CardModal__contentHeaderLeftTitleInput{
+  padding: 0 5px;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+}
+
+.CardModal__contentBodyCommentDescriptionHead {
+  color: #98999B;
+  >p {
+    margin-bottom: 0 !important;
+  }
+  .CardModal__contentBodyCommentDescriptionText {
+    font-weight: bold;
+    color: #000;
+  }
+}
+
+.CardModal__contentBodyCommentInner{
+  width: 100%;
+  .CardModal__contentBodyCommentInnerForm{
+    .CardModal__contentBodyCommentInnerTextArea{
+      padding: 5px 10px;
+      border: none;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+      border-radius: 3px;
+      margin-bottom: 5px;
+      min-height: 35px;
+      max-height: 80px;
+      overflow-y: scroll;
+    }
+  }
+}
+
+.userNameAvatarFirstLetterInCard {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #BA55D3;
+  text-align: center;
+  line-height: 30px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #fff;
+}
+
+.lastThreeComments{
+  width: 100%;
+}
+
+.styledLastThreeComments{
+  background-color: #fff;
+  width: 90%;
+  height: 75px;
+  border-radius: 3px;
+  .styledLastThreeCommentsRightTopSmall{
+    font-size: 12px;
+    color: #A4A8AB;
+  }
+  .styledLastThreeCommentsRightBottom{
+    font-size: 14px;
+  }
+}
+
+.CardModal__contentBodyCommentInnerTextAreaButton{
+  width: 70px !important;
+}
+
+.CardModal__contentBodyCommentInnerToggleVisibility{
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+  width: 150px;
+  color: #98999B;
+  height: 20px;
+  transition: all .3s ease;
+  font-weight: bold;
+  &:hover {
+    color: #6A6B6D;
+  }
+}
+
+.Comment {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: -10px;
+  z-index: 1010;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all .3s ease;
+  &__content {
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #fff;
+    transform: scale(0.5);
+    transition: all .3s ease;
+    width: 50vw;
+    &.active {
+      transform: scale(1);
+    }
+  }
+  &.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.notesPageMenuActivityBodyActivitiesWrapper{
+  // background-color: #fff;
+  border-radius: 3px;
+  width: 100%;
+  .notesPageMenuActivityBodyActivitiesIcon{
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #BA55D3;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    margin: 5px 10px;
+    font-weight: normal;
+    font-size: 14px;
+  }
+  .notesPageMenuActivityBodyActivitiesRightSideUp{
+    font-size: 12px;
+    margin-top: 5px;
+    margin-right: 2px;
+    color: #000;
+  }
+  .notesPageMenuActivityBodyActivitiesRightSideDown{
+    font-size: 10px;
+  }
+}
+
+.notesPageMenuActivityBodyActivitiesIconImg{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-top: -3px;
+}
+
+.showActivityLogLastFiveInCardWrapperLeft{
+  width: 40px;
+  height: 40px;
+  margin-right: 20px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  font-weight: bold;
+  background-color: #BA55D3;
+  color: #fff;
+}
+
+.showActivityLogLastFiveInCardWrapperRightTop{
+  font-size: 14px;
+}
+
+.showActivityLogLastFiveInCardWrapperRightBottom{
+  font-size: 12px;
+  color: #6A6B6D;
+}
+
+.notesPageMenuActivityBodyActivitiesIconImgInActionsLog {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-top: -6px;
+}

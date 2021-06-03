@@ -1,0 +1,11 @@
+export const NO_BOARD_ID = 'No board with that id'
+export const NO_LIST_ID = 'No list with that id'
+export const NO_CARD_ID = 'No card with that id'
+export const BOARD_DELETED = 'Board deleted successfully'
+export const LIST_DELETED = 'List deleted successfully'
+export const CARD_DELETED = 'Card deleted successfully'
+export const USER_DOESNT_EXIST = "User doesn't exist!"
+export const INVALID_CREDENTIALS = "Invalid credentials!"
+export const SOMETHING_WENT_WRONG = "Something went wrong!"
+export const USER_ALREADY_EXISTS = "User already exists!"
+export const PASSWORDS_DONT_MATCH = "Passwords don't match!"
